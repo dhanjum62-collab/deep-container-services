@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pa">
+<head>
+    <meta charset="UTF-8">
+    <title>Deep Container Services - Invoice</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <div class="no-print">
+        <h2>🚚 Professional Invoice Generator</h2>
+        
+        <div class="input-section">
+            <div style="width: 100%; margin-bottom: 10px; font-weight: bold; color: #1a73e8;">
+                Invoice #: <span id="nextInvNum">Loading...</span>
+            </div>
+            
+            <input type="text" id="clientName" placeholder="Warehouse Name">
+            <input type="date" id="invoiceDate">
+            
+            <div id="itemsContainer" style="width: 100%;">
+                <div class="item-row" style="display: flex; gap: 5px; margin-bottom: 10px;">
+                    <input type="text" class="cNo" placeholder="Container #" style="flex:2;">
+                    <input type="text" class="cDesc" placeholder="Type (e.g. 40ft)" style="flex:2;">
+                    <input type="number" class="cRate" placeholder="Rate ($)" style="flex:1;">
+                    <input type="number" class="cQty" placeholder="Qty" style="flex:1;">
+                </div>
+            </div>
+
+            <button onclick="addItemRow()" style="background:#6c757d; width: 100%; margin-bottom: 10px;">+ Add Another Container</button>
+            <button onclick="updateInvoice()" class="btn-update">Generate Preview</button>
+        </div>
+        <hr>
+    </div>
+
+    <div id="invoice-card" class="invoice-box">
+        <div style="text-align: center; margin-bottom: 20px;">
+            <h2 style="margin:0; border:none;">Deep Container Services</h2>
+            <p>Brampton, ON | Phone: [Tuhada Number]</p>
+        </div>
+        
+        <table style="width:100%;">
+            <tr>
+                <td><strong>Bill To:</strong> <span id="displayClient">---</span></td>
+                <td style="text-align: right;">
+                    <strong>Invoice:</strong> <span id="displayInvNum">---</span><br>
+                    <strong>Date:</strong> <span id="displayDate">---</span>
+                </td>
+            </tr>
+        </table>
+
+        <table style="width:100%; margin-top: 20px; border-collapse: collapse;">
+            <thead>
+                <tr class="heading" style="background: #eee;">
+                    <td style="border: 1px solid #ddd; padding: 8px;">Container Detail</td>
+                    <td style="border: 1px solid #ddd; padding: 8px; text-align: right;">Total</td>
+                </tr>
+            </thead>
+            <tbody id="displayDescRows">
+                </tbody>
+            <tfoot>
+                <tr class="total">
+                    <td style="text-align: right; padding: 10px;"><strong>Grand Total:</strong></td>
+                    <td style="text-align: right; padding: 10px; color: #e74c3c;">$<span id="grandTotal">0.00</span></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <div class="actions no-print" style="margin-top: 20px; display: flex; gap: 10px;">
+        <button onclick="window.print()" class="btn-print" style="flex:1;">Print / Save PDF</button>
+        <button onclick="sendWhatsApp()" class="btn-wa" style="flex:1;">Send WhatsApp</button>
+        <button onclick="saveToSheets()" class="btn-save" style="flex:1;">Save to Excel (Cloud)</button>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
